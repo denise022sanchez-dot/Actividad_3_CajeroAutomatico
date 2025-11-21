@@ -1,9 +1,21 @@
 #include <iostream>
 #include <string>
-#include <stdexceptions>
+#include <stdexcept>
+#include <limits>
 
 
 using namespace std;
+
+struct Cuenta {
+	int numeroCuenta;
+	int nip;
+	double saldo;
+	string nombreTitular;
+};
+
+Cuenta* buscarCuenta(Cuenta cuentas[], int tamano, int numCuenta);
+
+
 
 
 int main() {
@@ -16,3 +28,14 @@ int main() {
 
 
 }
+
+Cuenta* buscarCuenta(Cuenta cuentas[], int tamano, int numCuenta) {
+	for (int i = 0; i < tamano; i++) {
+		if (cuentas[i].numeroCuenta == numCuenta) {
+			return &cuentas[i];
+		}
+
+	}
+}
+
+
