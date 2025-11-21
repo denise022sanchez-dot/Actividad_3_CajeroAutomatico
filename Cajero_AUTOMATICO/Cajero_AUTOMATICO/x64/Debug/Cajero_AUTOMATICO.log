@@ -1,0 +1,5 @@
+﻿  Cajero_AUTOMATICO.cpp
+C:\Users\denis\OneDrive\Documentos\GitHub\Actividad_3_CajeroAutomatico\Cajero_AUTOMATICO\Cajero_AUTOMATICO\Cajero_AUTOMATICO.cpp(32,6): warning C4101: 'numCuentaIngresado': variable local sin referencia
+C:\Users\denis\OneDrive\Documentos\GitHub\Actividad_3_CajeroAutomatico\Cajero_AUTOMATICO\Cajero_AUTOMATICO\Cajero_AUTOMATICO.cpp(32,26): warning C4101: 'nipIngresado': variable local sin referencia
+C:\Users\denis\OneDrive\Documentos\GitHub\Actividad_3_CajeroAutomatico\Cajero_AUTOMATICO\Cajero_AUTOMATICO\Cajero_AUTOMATICO.cpp(50,1): warning C4715: 'buscarCuenta': no todas las rutas de acceso de control devuelven un valor
+  Cajero_AUTOMATICO.vcxproj -> C:\Users\denis\OneDrive\Documentos\GitHub\Actividad_3_CajeroAutomatico\Cajero_AUTOMATICO\x64\Debug\Cajero_AUTOMATICO.exe
