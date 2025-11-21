@@ -14,7 +14,7 @@ struct Cuenta {
 };
 
 Cuenta* buscarCuenta(Cuenta cuentas[], int tamano, int numCuenta);
-
+void mostrarMenu();
 
 
 
@@ -33,7 +33,53 @@ int main() {
 
 	Cuenta* cuentaActual = nullptr;
 
+	do {
 
+		cout << "================================" << endl;
+		cout << "  SISTEMA DE CAJERO AUTOMATICO  " << endl;
+		cout << "================================" << endl;
+
+		if (cuentaActual == nullptr) {
+			cout << "\n--- INICIO DE SESION ---" << endl;
+			cout << "Ingrese su numero de cuenta: ";
+
+			if (!(cin >> numCuentaIngresado)) {
+				cout << "Error: Entrada no valida. " << endl;
+				limpiarBuffer();
+				system("pause");
+				continue; 
+			}
+
+			cuentaActual = buscarCuenta(cuentas, TOTAL_CUENTAS, numCuentaIngresado);
+			
+			if (cuentaActual != nullptr) {
+				cout << "Ingrese su NIP: ";
+				if (!(cin >> nipIngresado)) {
+					cout << "Error: NIP no valido." << endl;
+					limpiarBuffer();
+					cuentaActual = nullptr;
+				}
+				else {
+					//Se verifica que la contraseña sea la correcta
+					if (cuentaActual->nip != nipIngresado) {
+						cout << "NIP incorrecto." << endl;
+						cuentaActual = nullptr; // Resetear sesión
+					}
+					else {
+						cout << "\nBienvenido/a " << cuentaActual->nombreTitular << endl;
+					}
+				}
+			}
+			else {
+				cout << "La cuenta no existe." << endl;
+			}
+			system("pause");
+		}
+
+
+
+
+		} while (true);
 
 	return 0;
 
@@ -49,4 +95,19 @@ Cuenta* buscarCuenta(Cuenta cuentas[], int tamano, int numCuenta) {
 	}
 }
 
+void mostrarMenu() {
+	cout << "\n--- MENU PRINCIPAL ---" << endl;
+	cout << "1. Consultar Saldo" << endl;
+	cout << "2. Retirar Efectivo" << endl;
+	cout << "3. Depositar Fondos" << endl;
+	cout << "4. Transferir a otra cuenta" << endl;
+	cout << "5. Cerrar Sesion" << endl;
+	cout << "6. Salir del Sistema" << endl;
+}
 
+
+
+void limpiarBuffer() {
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
