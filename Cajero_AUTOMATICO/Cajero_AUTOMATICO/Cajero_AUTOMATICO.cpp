@@ -17,6 +17,9 @@ Cuenta* buscarCuenta(Cuenta cuentas[], int tamano, int numCuenta);
 void mostrarMenu();
 
 
+void limpiarBuffer();
+
+
 
 int main() {
 
@@ -35,6 +38,8 @@ int main() {
 
 	do {
 
+		system("cls");
+
 		cout << "================================" << endl;
 		cout << "  SISTEMA DE CAJERO AUTOMATICO  " << endl;
 		cout << "================================" << endl;
@@ -47,11 +52,11 @@ int main() {
 				cout << "Error: Entrada no valida. " << endl;
 				limpiarBuffer();
 				system("pause");
-				continue; 
+				continue;
 			}
 
 			cuentaActual = buscarCuenta(cuentas, TOTAL_CUENTAS, numCuentaIngresado);
-			
+
 			if (cuentaActual != nullptr) {
 				cout << "Ingrese su NIP: ";
 				if (!(cin >> nipIngresado)) {
@@ -76,10 +81,49 @@ int main() {
 			system("pause");
 		}
 
+		else {
+			mostrarMenu();
+			cout << "Seleccione una opcion: ";
 
 
+			try {
+				if (!(cin >> opcion)) {
+					throw runtime_error("La opcion debe ser un numero.");
+				}
 
-		} while (true);
+				switch (opcion) {
+				case 1:
+					break;
+
+				case 2:
+					break;
+
+				case 3:
+					break;
+
+				case 4:
+					break;
+
+				case 5:
+					break;
+
+				case 6:
+					break;
+
+				default:
+					cout << "Opcion no reconocida." << endl;
+				}
+
+			}
+			catch (const exception& e) {
+				// Captura errores de lógica (saldo insuficiente) o entrada
+				cout << "\n>>> ERROR DEL SISTEMA: " << e.what() << " <<<" << endl;
+				limpiarBuffer();
+			}
+
+			system("pause");
+		}
+	} while (true);
 
 	return 0;
 
