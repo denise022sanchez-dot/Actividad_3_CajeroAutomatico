@@ -1,11 +1,14 @@
-#include <iostream>
+#include <iostream> //Se declaran las librerias
 #include <string>
-#include <stdexcept>
-#include <limits>
+#include <stdexcept> //Se utiliza para hacer las excepciones
+#include <limits> //Para limpiar el buffer de entrada
 
 
 using namespace std;
 
+//Esta sección define el tipo de los datos.
+//La estructura 'Cuenta' agrupa toda la información relacionada con un usuario
+//su número de cuenta, contraseña, dinero y nombre en una sola estructura
 struct Cuenta {
 	int numeroCuenta;
 	int nip;
@@ -13,6 +16,7 @@ struct Cuenta {
 	string nombreTitular;
 };
 
+//Se muestran las funciones que se van a utlizar en la funcion principal y que se desarrollarán mas adelante
 Cuenta* buscarCuenta(Cuenta cuentas[], int tamano, int numCuenta);
 void mostrarMenu();
 void consultarSaldo(const Cuenta* cuenta);
@@ -22,10 +26,13 @@ void transferir(Cuenta* origen, Cuenta cuentas[], int tamano);
 void limpiarBuffer();
 
 
-
+//inicia la funcion principal
 int main() {
 
-
+	//Se incializn los datos de las 3 cuentas
+   //Se crea la base de datos local usando un arreglo de estructuras.
+   //Los primero 4 digitos son del numero de cuenta, los segundos del NIP, y el tecero la cantidad
+   //de dinero disponible en cada cuenta
 	const int TOTAL_CUENTAS = 3;
 	Cuenta cuentas[TOTAL_CUENTAS] = {
 		{1001, 1234, 5000.00, "Juan Perez"},
@@ -36,9 +43,12 @@ int main() {
 	int opcion = 0;
 	int numCuentaIngresado, nipIngresado;
 
-	Cuenta* cuentaActual = nullptr;
+	//Se inicializa el puntero 'cuentaActual" que guardará la dirección de memoria
+	// de la cuenta que ha iniciado la sesión. Si es nullptr, nadie ha entrado.
+	Cuenta* cuentaActual = nullptr;// Puntero para manejar la sesión
 
-	do {
+	//El ciclo do-while mantiene el programa encendido indefinidamente
+	do { 
 
 		system("cls");
 
@@ -46,10 +56,12 @@ int main() {
 		cout << "  SISTEMA DE CAJERO AUTOMATICO  " << endl;
 		cout << "================================" << endl;
 
+		////Esta condicional se ejecuta solo si no hay usuario dentro de la sesion. Pide cuenta y NIP.
 		if (cuentaActual == nullptr) {
 			cout << "\n--- INICIO DE SESION ---" << endl;
 			cout << "Ingrese su numero de cuenta: ";
 
+			//Se hace validacion, por si meten letras en lugar de numeros
 			if (!(cin >> numCuentaIngresado)) {
 				cout << "Error: Entrada no valida. " << endl;
 				limpiarBuffer();
@@ -57,6 +69,7 @@ int main() {
 				continue;
 			}
 
+			//Se utilizan los punteros para buscar cuenta y devuelve una dirección
 			cuentaActual = buscarCuenta(cuentas, TOTAL_CUENTAS, numCuentaIngresado);
 
 			if (cuentaActual != nullptr) {
@@ -83,16 +96,20 @@ int main() {
 			system("pause");
 		}
 
+		//Cuando el usuario ingresa sus datos correctamente muestra el menu de operaciones.
+		// Contiene el manejo de excepciones y el switch de opciones.
 		else {
 			mostrarMenu();
 			cout << "Seleccione una opcion: ";
 
-
+			// Try catch envuelve las operaciones críticas. Si algo falla saldo insuficiente, entrada mala
+			// se lanza una excepción que es capturada abajo para no cerrar el programa.
 			try {
 				if (!(cin >> opcion)) {
 					throw runtime_error("La opcion debe ser un numero.");
 				}
 
+				//Segun la variable opcion, se ejcuta lo que el usuario desea hacer
 				switch (opcion) {
 				case 1:
 					break;
