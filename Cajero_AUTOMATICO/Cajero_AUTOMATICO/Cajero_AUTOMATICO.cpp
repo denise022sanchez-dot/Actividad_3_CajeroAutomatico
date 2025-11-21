@@ -112,21 +112,29 @@ int main() {
 				//Segun la variable opcion, se ejcuta lo que el usuario desea hacer
 				switch (opcion) {
 				case 1:
+					consultarSaldo(cuentaActual);
 					break;
 
 				case 2:
+					retirar(cuentaActual);
 					break;
 
 				case 3:
+					depositar(cuentaActual);
 					break;
 
 				case 4:
+					transferir(cuentaActual, cuentas, TOTAL_CUENTAS);
 					break;
 
 				case 5:
+					cout << "Cerrando sesion..." << endl;
+					cuentaActual = nullptr; // Desconectar usuario
 					break;
 
 				case 6:
+					cout << "Apagando sistema. Hasta luego." << endl;
+					return 0; // Salir del programa
 					break;
 
 				default:
